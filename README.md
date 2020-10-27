@@ -21,7 +21,7 @@ Every template comes with the following packages, updated for the chosen version
 ## Installation
 Download one of the following files and place it in the ProjectTemplates folder of the Unity version you're using. 
 
-```http
+```
 Unity 2020.1.6f1 example directory:
 C:\Program Files\Unity\Hub\Editor\2020.1.6f1\Editor\Data\Resources\PackageManager\ProjectTemplates
 ```
