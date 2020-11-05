@@ -21,7 +21,7 @@ Every template comes with the following packages, updated for the chosen version
 ## Installation
 Download one of the template files and place it in the ProjectTemplates folder of the Unity version you're using.
 
-![](https://gfycat.com/uncomfortabledisastrousape)
+![](../main/Documentation/installation.gif)
 
 The ProjectTemplates folder is version-specific, you will need a copy of the templates for each Unity installation.
 
