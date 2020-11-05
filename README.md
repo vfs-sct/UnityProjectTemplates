@@ -19,12 +19,9 @@ Every template comes with the following packages, updated for the chosen version
 - NaughtyAttributes (by Denis Rizov: [GitHub](https://github.com/dbrizov/NaughtyAttributes))
 
 ## Installation
-Download one of the following files and place it in the ProjectTemplates folder of the Unity version you're using. 
+Download one of the template files and place it in the ProjectTemplates folder of the Unity version you're using.
 
-```
-Unity 2020.1.6f1 example directory:
-C:\Program Files\Unity\Hub\Editor\2020.1.6f1\Editor\Data\Resources\PackageManager\ProjectTemplates
-```
+![](https://gfycat.com/uncomfortabledisastrousape)
 
 The ProjectTemplates folder is version-specific, you will need a copy of the templates for each Unity installation.
 
