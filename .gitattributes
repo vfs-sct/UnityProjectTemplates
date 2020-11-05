@@ -109,6 +109,7 @@ Assets/**/*[Ll]ighting*.asset -unityyaml lfs
 *.gz lfs
 *.rar lfs
 *.tar lfs
+*.tgz
 # Wwise Files
 *.bnk lfs
 *.cache lfs
