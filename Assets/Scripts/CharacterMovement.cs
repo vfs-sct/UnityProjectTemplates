@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 #pragma warning disable 649
@@ -11,7 +10,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField, Expandable] private MovementAttributes _movementAttributes;
+    [SerializeField] private MovementAttributes _movementAttributes;
 
     public MovementAttributes MovementAttributes => _movementAttributes;
     public bool IsGrounded { get; private set; } = true;
