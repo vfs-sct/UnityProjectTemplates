@@ -14,9 +14,7 @@ Every template comes with the following packages, updated for the chosen version
 - ProGrids
 - TextMeshPro
 - Universal RP / Shader Graph
-
-#### External Packages
-- NaughtyAttributes (by Denis Rizov: [GitHub](https://github.com/dbrizov/NaughtyAttributes))
+- NavMeshComponents (3D templates only) [GitHub](https://github.com/Unity-Technologies/NavMeshComponents)
 
 ## Installation
 Download any/all of the following templates  
