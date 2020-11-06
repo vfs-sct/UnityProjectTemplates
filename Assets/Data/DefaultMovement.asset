@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   Acceleration: 10
-  TurnSpeed: 10
+  TurnSpeed: 20
   Gravity: -20
   JumpHeight: 2
   AirControl: 0.1

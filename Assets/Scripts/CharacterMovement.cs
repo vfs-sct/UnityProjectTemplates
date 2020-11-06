@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.AI;
 #pragma warning disable 649
 
-[RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private MovementAttributes _movementAttributes;
+    [SerializeField] private Animator _art;
 
     public MovementAttributes MovementAttributes => _movementAttributes;
     public bool IsGrounded { get; private set; } = true;
@@ -24,9 +24,8 @@ public class CharacterMovement : MonoBehaviour
     public float ForcedMovement { get; set; } = 0f;
     public float TurnSpeedMultiplier { get; set; } = 1f;
     
-    private Rigidbody _rigidbody;
-    private NavMeshAgent _navMeshAgent;
-    
+    private Rigidbody2D _rigidbody;
+
     public Vector3 Velocity
     {
         get => _rigidbody.velocity;
@@ -35,16 +34,12 @@ public class CharacterMovement : MonoBehaviour
     
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-        _rigidbody.useGravity = false;
-        
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.updatePosition = false;
-        _navMeshAgent.updateRotation = false;
-        
-        LookDirection = transform.forward;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
+        _rigidbody.gravityScale = 0f;
+
+        LookDirection = _art.transform.forward;
     }
 
     public void SetMoveInput(Vector3 input)
@@ -69,27 +64,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void MoveTo(Vector3 destination)
-    {
-        _navMeshAgent.SetDestination(destination);
-    }
-
-    public void Stop()
-    {
-        _navMeshAgent.ResetPath();
-        SetMoveInput(Vector3.zero);
-    }
-
     private void FixedUpdate()
     {
-        Vector3 input = MoveInput;
-        if (ForcedMovement > 0f) input = transform.forward * ForcedMovement;
-        Vector3 right = Vector3.Cross(transform.up, input);
-        Vector3 forward = Vector3.Cross(right, GroundNormal);
-        Vector3 targetVelocity = forward * (MovementAttributes.Speed * MoveSpeedMultiplier);
-        Vector3 velocityDiff = targetVelocity - Velocity;
+        float input = MoveInput.x;
+        if (ForcedMovement > 0f) input = (LookDirection * ForcedMovement).x;
+        float targetVelocity = (input * MovementAttributes.Speed * MoveSpeedMultiplier);
+        float velocityDiff = targetVelocity - Velocity.x;
         float control = IsGrounded ? 1f : MovementAttributes.AirControl;
-        Vector3 acceleration = velocityDiff * (MovementAttributes.Acceleration * control);
+        Vector3 acceleration = Vector2.right * (velocityDiff * MovementAttributes.Acceleration * control);
         if (Velocity.y > 0f) acceleration.y = Mathf.Clamp(acceleration.y, 0f, Mathf.Infinity);
         acceleration += GroundNormal * MovementAttributes.Gravity;
         _rigidbody.AddForce(acceleration);
@@ -97,8 +79,8 @@ public class CharacterMovement : MonoBehaviour
         if (IsGrounded)
         {
             Quaternion targetRotation = Quaternion.LookRotation(LookDirection);
-            Quaternion rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * MovementAttributes.TurnSpeed * TurnSpeedMultiplier);
-            _rigidbody.MoveRotation(rotation);
+            Quaternion rotation = Quaternion.Slerp(_art.transform.rotation, targetRotation, Time.fixedDeltaTime * MovementAttributes.TurnSpeed * TurnSpeedMultiplier);
+            _art.transform.rotation = rotation;
         }
     }
 
@@ -106,20 +88,9 @@ public class CharacterMovement : MonoBehaviour
     {
         IsGrounded = CheckGrounded();
         
-        if(_navMeshAgent.hasPath)
-        {
-            Vector3 nextPathPoint = _navMeshAgent.path.corners[1];
-            Vector3 pathDir = (nextPathPoint - transform.position).normalized;
-            SetMoveInput(pathDir);
-            SetLookDirection(pathDir);
-        }
-
-        _navMeshAgent.nextPosition = transform.position;
-
         if(!CanMove)
         {
             SetMoveInput(Vector3.zero);
-            SetLookDirection(transform.forward);
         }
     }
 
@@ -130,7 +101,8 @@ public class CharacterMovement : MonoBehaviour
         Vector3 diff = end - start;
         Vector3 dir = diff.normalized;
         float distance = diff.magnitude;
-        if (Physics.SphereCast(start, MovementAttributes.GroundCheckRadius, dir, out RaycastHit hit, distance, MovementAttributes.GroundMask))
+        RaycastHit2D hit = Physics2D.CircleCast(start, MovementAttributes.GroundCheckRadius, dir, distance, MovementAttributes.GroundMask);
+        if(hit)
         {
             GroundNormal = hit.normal;
             return true;

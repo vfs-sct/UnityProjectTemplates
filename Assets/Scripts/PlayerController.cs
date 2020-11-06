@@ -12,10 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("Character")]
     [SerializeField] private GameObject _target;
     [SerializeField] private bool _autoPossess = true;
-    
-    [Header("Cameras")]
-    [SerializeField] private CinemachineFreeLook _cinemachineCamera;
-    
+                                                                         
     private Camera _mainCamera;
     private CharacterMovement _characterMovement;
 
@@ -52,11 +49,6 @@ public class PlayerController : MonoBehaviour
         _possessed = false;
     }
 
-    public void OnLook(InputValue value)
-    {
-        _lookInput = value.Get<Vector2>();
-    }
-
     public void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>();
@@ -69,19 +61,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_cinemachineCamera != null)
-        {
-            _cinemachineCamera.m_XAxis.m_InputAxisValue = _lookInput.x;
-            _cinemachineCamera.m_YAxis.m_InputAxisValue = _lookInput.y;
-        }
-
         if (_possessed)
         {
-            Vector3 up = Vector3.up;
-            Vector3 right = _mainCamera.transform.right;
-            Vector3 forward = Vector3.Cross(right, up);
-            Vector3 moveInput = forward * _moveInput.y + right * _moveInput.x;
-        
+            Vector3 moveInput = Vector3.right * _moveInput.x;
             _characterMovement.SetMoveInput(moveInput);
             _characterMovement.SetLookDirection(moveInput);
         }
