@@ -22,7 +22,7 @@ Every template comes with the following packages, updated for the chosen version
 Download any/all of the following templates  
 
 [URP - Blank](https://github.com/vfs-sct/UnityProjectTemplates/raw/blank/urp-blank.tgz)  
-[URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/third-person.tgz)
+[URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/urp-third-person.tgz)
 
 Copy the downloaded template file(s) into the ProjectTemplates folder of the Unity version you're using.  
 **The ProjectTemplates folder is version-specific, you will need a copy of the templates for each Unity installation.**
