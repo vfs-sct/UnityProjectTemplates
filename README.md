@@ -29,6 +29,8 @@ Copy the downloaded template file(s) into the ProjectTemplates folder of the Uni
 
 ![](../main/Documentation/installation.gif)
 
+**The Unity Hub MUST be restarted for the newly installed templates to appear!**
+
 ## Use
 Select one of the installed templates when creating a new project.
 
