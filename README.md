@@ -24,7 +24,9 @@ Download any/all of the following templates
 [URP - Blank](https://github.com/vfs-sct/UnityProjectTemplates/raw/blank/urp-blank.tgz)  
 [URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/urp-third-person.tgz)
 
-Copy the downloaded template file(s) into the ProjectTemplates folder of the Unity version you're using.  
+Copy the downloaded template file(s) into the ProjectTemplates folder of the Unity version you're using. For example on Unity 2020.1.6f1:  
+```Hub\Editor\2020.1.6f1\Editor\Data\Resources\PackageManager\ProjectTemplates```
+
 **The ProjectTemplates folder is version-specific, you will need a copy of the templates for each Unity installation.**
 
 ![](../main/Documentation/installation.gif)
