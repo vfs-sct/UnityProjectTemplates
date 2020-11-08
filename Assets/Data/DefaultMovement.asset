@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   Acceleration: 10
-  TurnSpeed: 20
   Gravity: -20
-  JumpHeight: 2
+  JumpHeight: 2.5
   AirControl: 0.1
   GroundCheckRadius: 0.1
   GroundCheckStart: {x: 0, y: 0.15, z: 0}
   GroundCheckEnd: {x: 0, y: -0.1, z: 0}
+  MaxSlopeAngle: 40
+  GroundedFudgeTime: 0.1
   GroundMask:
     serializedVersion: 2
     m_Bits: 1
