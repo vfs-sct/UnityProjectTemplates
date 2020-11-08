@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _autoPossess = true;
     
     [Header("Cameras")]
-    [SerializeField] private CinemachineFreeLook _cinemachineCamera;
+    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera;
 
     [Header("Aim")] 
     [SerializeField] private LayerMask _aimMask = 1 << 3;
     [SerializeField] private float _aimDistance = 200f;
     
     private Camera _mainCamera;
+    private CinemachinePOV _cinemachinePOV;
     private CharacterMovement _characterMovement;
     private Weapon _weapon;
 
@@ -33,12 +34,13 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _mainCamera = Camera.main;
+        _cinemachinePOV = _cinemachineCamera.GetCinemachineComponent<CinemachinePOV>();
         if(_autoPossess && _target != null) Possess(_target);
     }
 
     public void Possess(GameObject target)
     {
-        _characterMovement = _target.GetComponent<CharacterMovement>();
+        _characterMovement = _target.GetComponentInChildren<CharacterMovement>();
         _weapon = _target.GetComponentInChildren<Weapon>();
         
         if (_characterMovement != null && _weapon != null)
@@ -84,8 +86,8 @@ public class PlayerController : MonoBehaviour
     {
         if (_cinemachineCamera != null)
         {
-            _cinemachineCamera.m_XAxis.m_InputAxisValue = _lookInput.x;
-            _cinemachineCamera.m_YAxis.m_InputAxisValue = _lookInput.y;
+            _cinemachinePOV.m_HorizontalAxis.m_InputAxisValue = _lookInput.x;
+            _cinemachinePOV.m_VerticalAxis.m_InputAxisValue = _lookInput.y;
         }
 
         if (_possessed)
