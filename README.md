@@ -18,18 +18,19 @@ Every template comes with the following packages, updated for the chosen version
 ## Installation
 Download any/all of the following templates  
 
-### 3D
+### Blank
 [URP - Blank](https://github.com/vfs-sct/UnityProjectTemplates/raw/blank/urp-blank.tgz)  
 
-[URP - 2.5D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2.5D-platformer/urp-2.5D-platformer.tgz)  
-
+### Third Person
 [URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/urp-third-person.tgz)  
 [URP - Third Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person-shooter/urp-third-person-shooter.tgz)  
 
+### First Person
 [URP - First Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/first-person-shooter/urp-first-person-shooter.tgz)  
 
-### 2D/2.5D
+### Sidescroller
 [URP - 2D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2D-platformer/urp-2D-platformer.tgz)  
+[URP - 2.5D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2.5D-platformer/urp-2.5D-platformer.tgz)  
 
 Copy the downloaded template file(s) into the ProjectTemplates folder of the Unity version you're using. For example on Unity 2020.1.6f1:  
 ```Hub\Editor\2020.1.6f1\Editor\Data\Resources\PackageManager\ProjectTemplates```  
