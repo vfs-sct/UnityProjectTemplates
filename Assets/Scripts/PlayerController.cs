@@ -15,12 +15,18 @@ public class PlayerController : MonoBehaviour
     
     [Header("Cameras")]
     [SerializeField] private CinemachineFreeLook _cinemachineCamera;
+
+    [Header("Aim")] 
+    [SerializeField] private LayerMask _aimMask = 1 << 3;
+    [SerializeField] private float _aimDistance = 200f;
     
     private Camera _mainCamera;
     private CharacterMovement _characterMovement;
+    private Weapon _weapon;
 
     private Vector2 _lookInput;
     private Vector2 _moveInput;
+    private bool _isFiring = false;
     private bool _possessed = false;
 
     private void Start()
@@ -32,23 +38,25 @@ public class PlayerController : MonoBehaviour
 
     public void Possess(GameObject target)
     {
-        if (_target.TryGetComponent(out CharacterMovement characterMovement))
+        _characterMovement = _target.GetComponent<CharacterMovement>();
+        _weapon = _target.GetComponentInChildren<Weapon>();
+        
+        if (_characterMovement != null && _weapon != null)
         {
-            _characterMovement = characterMovement;
             _possessed = true;
             Debug.Log($"{gameObject.name} possessed {_target.name}", _target);
         }
         else
         {
             Debug.LogWarning($"{gameObject.name} failed to possess {_target.name}", _target);
-            _characterMovement = null;
-            _possessed = false;
+            Depossess();
         }
     }
 
     public void Depossess()
     {
         _characterMovement = null;
+        _weapon = null;
         _possessed = false;
     }
 
@@ -65,6 +73,11 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputValue value)
     {
         _characterMovement?.Jump();
+    }
+
+    public void OnFire(InputValue value)
+    {
+        _isFiring = value.Get<float>() > 0.5f;
     }
 
     private void Update()
@@ -84,6 +97,14 @@ public class PlayerController : MonoBehaviour
         
             _characterMovement.SetMoveInput(moveInput);
             _characterMovement.SetLookDirection(_mainCamera.transform.forward);
+
+            Vector3 aimPoint = _mainCamera.transform.position + _mainCamera.transform.forward * _aimDistance;
+            if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit hit, _aimDistance, _aimMask))
+            {
+                aimPoint = hit.point;
+            }
+            Debug.DrawLine(_mainCamera.transform.position, aimPoint, Color.red);
+            if(_isFiring) _weapon.TryFire(aimPoint);
         }
     }
 }

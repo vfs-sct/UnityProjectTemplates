@@ -277,6 +277,10 @@ MonoBehaviour:
   _target: {fileID: 3533786471153739652}
   _autoPossess: 1
   _cinemachineCamera: {fileID: 6118233913322776310}
+  _aimMask:
+    serializedVersion: 2
+    m_Bits: 257
+  _aimDistance: 200
 --- !u!1 &3533786470966454106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1045,10 @@ PrefabInstance:
     - target: {fileID: 1176654328086274624, guid: 942b43a680a015645b06a80dee0cb0e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 74.463
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954421827404200186, guid: 942b43a680a015645b06a80dee0cb0e1, type: 3}
+      propertyPath: m_Name
+      value: AssaultRifle
       objectReference: {fileID: 0}
     - target: {fileID: 3715331259793736066, guid: 942b43a680a015645b06a80dee0cb0e1, type: 3}
       propertyPath: m_LocalPosition.y
