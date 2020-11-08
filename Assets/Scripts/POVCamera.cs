@@ -20,6 +20,7 @@ public class POVCamera : MonoBehaviour
         {
             UniversalAdditionalCameraData cameraData = _mainCamera.GetUniversalAdditionalCameraData();
             cameraData.cameraStack.Add(_camera);
+            cameraData.renderPostProcessing = false;
         }
     }
 
