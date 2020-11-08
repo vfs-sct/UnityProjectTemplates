@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _target;
     [SerializeField] private bool _autoPossess = true;
                                                                          
-    private Camera _mainCamera;
     private CharacterMovement _characterMovement;
 
     private Vector2 _lookInput;
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        _mainCamera = Camera.main;
         if(_autoPossess && _target != null) Possess(_target);
     }
 
@@ -65,7 +63,6 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 moveInput = Vector3.right * _moveInput.x;
             _characterMovement.SetMoveInput(moveInput);
-            _characterMovement.SetLookDirection(moveInput);
         }
     }
 }

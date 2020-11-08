@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
     public bool IsGrounded { get; private set; } = true;
     public Vector3 GroundNormal { get; private set; } = Vector3.up;
     public Vector3 MoveInput {get; private set;}
-    public Vector3 LocalMoveInput {get; private set;}
+    public bool HasMoveInput { get; private set; }
     public Vector3 LookDirection {get; private set;}
     
     public bool CanMove {get; set;} = true;
@@ -46,13 +46,7 @@ public class CharacterMovement : MonoBehaviour
     {
         Vector3 flattened = input.Flatten();
         MoveInput = Vector3.ClampMagnitude(flattened, 1f);
-        LocalMoveInput = transform.InverseTransformDirection(MoveInput);
-    }
-
-    public void SetLookDirection(Vector3 direction)
-    {
-        if(direction.magnitude < 0.05f) return;
-        LookDirection = direction.Flatten().normalized;
+        HasMoveInput = input.magnitude > 0.1f;
     }
 
     public void Jump()

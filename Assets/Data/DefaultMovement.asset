@@ -18,9 +18,9 @@ MonoBehaviour:
   Gravity: -20
   JumpHeight: 2
   AirControl: 0.1
-  GroundCheckRadius: 0.25
-  GroundCheckStart: {x: 0, y: 0.4, z: 0}
-  GroundCheckEnd: {x: 0, y: -0.25, z: 0}
+  GroundCheckRadius: 0.4
+  GroundCheckStart: {x: 0, y: 0.5, z: 0}
+  GroundCheckEnd: {x: 0, y: 0.2, z: 0}
   GroundMask:
     serializedVersion: 2
     m_Bits: 1
