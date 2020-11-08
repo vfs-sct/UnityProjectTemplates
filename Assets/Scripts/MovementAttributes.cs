@@ -14,6 +14,7 @@ public class MovementAttributes : ScriptableObject
     public float Gravity = -20f;
     public float JumpHeight = 2f;
     public float AirControl = 0.1f;
+    public bool AirTurning = true;
     
     [Header("Grounding")]
     public float GroundCheckRadius = 0.25f;

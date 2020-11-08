@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
             Vector3 moveInput = forward * _moveInput.y + right * _moveInput.x;
         
             _characterMovement.SetMoveInput(moveInput);
-            _characterMovement.SetLookDirection(moveInput);
+            _characterMovement.SetLookDirection(_mainCamera.transform.forward);
         }
     }
 }

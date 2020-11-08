@@ -94,7 +94,7 @@ public class CharacterMovement : MonoBehaviour
         acceleration += GroundNormal * MovementAttributes.Gravity;
         _rigidbody.AddForce(acceleration);
 
-        if (IsGrounded)
+        if (IsGrounded || MovementAttributes.AirTurning)
         {
             Quaternion targetRotation = Quaternion.LookRotation(LookDirection);
             Quaternion rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * MovementAttributes.TurnSpeed * TurnSpeedMultiplier);

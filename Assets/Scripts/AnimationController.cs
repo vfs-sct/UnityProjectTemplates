@@ -17,8 +17,14 @@ public class AnimationController : MonoBehaviour
 
     private void Update()
     {
-        float speed = Mathf.Min(_characterMovement.MoveInput.magnitude, _characterMovement.Velocity.Flatten().magnitude / _characterMovement.MovementAttributes.Speed);
-        _animator.SetFloat("Speed", speed, _dampTime, Time.deltaTime);
+        Vector3 localMoveInput = _characterMovement.LocalMoveInput;
+        Vector3 relativeVelocity = _characterMovement.transform.InverseTransformDirection(_characterMovement.Velocity.Flatten());
+        float forwardSign = Mathf.Sign(localMoveInput.z);
+        float strafeSign = Mathf.Sign(localMoveInput.x);
+        float forward = Mathf.Min(Mathf.Abs(localMoveInput.z), Mathf.Abs(relativeVelocity.z / _characterMovement.MovementAttributes.Speed));
+        float strafe = Mathf.Min(Mathf.Abs(localMoveInput.x), Mathf.Abs(relativeVelocity.x / _characterMovement.MovementAttributes.Speed));
+        _animator.SetFloat("Forward", forward * forwardSign, _dampTime, Time.deltaTime);
+        _animator.SetFloat("Strafe", strafe * strafeSign, _dampTime, Time.deltaTime);
         _animator.SetBool("IsGrounded", _characterMovement.IsGrounded);
     }
 }
