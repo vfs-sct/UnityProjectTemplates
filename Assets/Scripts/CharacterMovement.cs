@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
 
     public MovementAttributes MovementAttributes => _movementAttributes;
     public bool IsGrounded { get; private set; } = true;
+    public bool IsFudgeGrounded { get; private set; }
     public Vector3 GroundNormal { get; private set; } = Vector3.up;
     public Vector3 MoveInput {get; private set;}
     public Vector3 LocalMoveInput {get; private set;}
@@ -22,9 +23,9 @@ public class CharacterMovement : MonoBehaviour
     public bool CanMove {get; set;} = true;
     public float MoveSpeedMultiplier { get; set; } = 1f;
     public float ForcedMovement { get; set; } = 0f;
-    public float TurnSpeedMultiplier { get; set; } = 1f;
     
     private Rigidbody2D _rigidbody;
+    private float _groundedFudgeTimer;
 
     public Vector3 Velocity
     {
@@ -57,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void Jump()
     {
-        if(CanMove && IsGrounded)
+        if(CanMove && IsFudgeGrounded)
         {
             float jumpVelocity = Mathf.Sqrt(2f * -MovementAttributes.Gravity * MovementAttributes.JumpHeight);
             Velocity = new Vector3(Velocity.x, jumpVelocity, Velocity.z);
@@ -72,14 +73,14 @@ public class CharacterMovement : MonoBehaviour
         float velocityDiff = targetVelocity - Velocity.x;
         float control = IsGrounded ? 1f : MovementAttributes.AirControl;
         Vector3 acceleration = Vector2.right * (velocityDiff * MovementAttributes.Acceleration * control);
-        if (Velocity.y > 0f) acceleration.y = Mathf.Clamp(acceleration.y, 0f, Mathf.Infinity);
-        acceleration += GroundNormal * MovementAttributes.Gravity;
+        if (IsGrounded) acceleration += GroundNormal * MovementAttributes.Gravity;
+        else acceleration += Vector3.up * MovementAttributes.Gravity;
         _rigidbody.AddForce(acceleration);
-
+        
         if (IsGrounded)
         {
             Quaternion targetRotation = Quaternion.LookRotation(LookDirection);
-            Quaternion rotation = Quaternion.Slerp(_art.transform.rotation, targetRotation, Time.fixedDeltaTime * MovementAttributes.TurnSpeed * TurnSpeedMultiplier);
+            Quaternion rotation = Quaternion.Slerp(_art.transform.rotation, targetRotation, Time.fixedDeltaTime * MovementAttributes.TurnSpeed);
             _art.transform.rotation = rotation;
         }
     }
@@ -87,6 +88,9 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         IsGrounded = CheckGrounded();
+        if (IsGrounded) _groundedFudgeTimer = MovementAttributes.GroundedFudgeTime;
+        else _groundedFudgeTimer -= Time.deltaTime;
+        IsFudgeGrounded = _groundedFudgeTimer > 0f;
         
         if(!CanMove)
         {
@@ -96,6 +100,7 @@ public class CharacterMovement : MonoBehaviour
 
     private bool CheckGrounded()
     {
+        GroundNormal = Vector3.up;
         Vector3 start = transform.TransformPoint(MovementAttributes.GroundCheckStart);
         Vector3 end = transform.TransformPoint(MovementAttributes.GroundCheckEnd);
         Vector3 diff = end - start;
@@ -105,7 +110,9 @@ public class CharacterMovement : MonoBehaviour
         if(hit)
         {
             GroundNormal = hit.normal;
-            return true;
+            bool angleValid = Vector3.Angle(Vector3.up, GroundNormal) < MovementAttributes.MaxSlopeAngle;
+            if (angleValid) _groundedFudgeTimer = MovementAttributes.GroundedFudgeTime;
+            return angleValid;
         }
 
         GroundNormal = Vector3.up;
