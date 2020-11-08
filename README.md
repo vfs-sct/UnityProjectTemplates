@@ -4,7 +4,6 @@ A collection of Unity Project Templates for prototyping various game types.
 
 ## What's Included
 Every template comes with the following packages, updated for the chosen version of Unity.
-
 #### Unity Packages
 - 2D Sprite
 - Cinemachine
@@ -21,6 +20,7 @@ Download any/all of the following templates
 
 [URP - Blank](https://github.com/vfs-sct/UnityProjectTemplates/raw/blank/urp-blank.tgz)  
 [URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/urp-third-person.tgz)  
+[URP - Third Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person-shooter/urp-third-person-shooter.tgz)  
 [URP - 2.5D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2.5D-platformer/urp-2.5D-platformer.tgz)  
 
 Copy the downloaded template file(s) into the ProjectTemplates folder of the Unity version you're using. For example on Unity 2020.1.6f1:  
