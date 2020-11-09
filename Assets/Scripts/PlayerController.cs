@@ -12,26 +12,32 @@ public class PlayerController : MonoBehaviour
     [Header("Character")]
     [SerializeField] private GameObject _target;
     [SerializeField] private bool _autoPossess = true;
-    
-    [Header("Cameras")]
-    [SerializeField] private CinemachineFreeLook _cinemachineCamera;
 
     [Header("Aim")] 
-    [SerializeField] private LayerMask _aimMask = 1 << 3;
-    [SerializeField] private float _aimDistance = 200f;
+    [SerializeField] private float _aimDistance = 10f;
+    [SerializeField] private float _aimOffset = 1f;
+    [SerializeField] private string _gamepadControlSchemeName = "Gamepad";
     
+    [Header("HUD")] 
+    [SerializeField] private RectTransform _crossHair;
+
     private Camera _mainCamera;
     private CharacterMovement _characterMovement;
     private Weapon _weapon;
 
-    private Vector2 _lookInput;
     private Vector2 _moveInput;
     private bool _isFiring = false;
     private bool _possessed = false;
+    private Vector3 _aimPoint;
+
+    private Vector2 _mousePosition;
+    private Vector3 _gamepadAimDirection;
+    private bool _useMouseAim = true;
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         _mainCamera = Camera.main;
         if(_autoPossess && _target != null) Possess(_target);
     }
@@ -60,9 +66,22 @@ public class PlayerController : MonoBehaviour
         _possessed = false;
     }
 
-    public void OnLook(InputValue value)
+    public void OnControlsChanged(PlayerInput input)
     {
-        _lookInput = value.Get<Vector2>();
+        _useMouseAim = !input.currentControlScheme.Equals(_gamepadControlSchemeName);
+    }
+
+    public void OnMouseAim(InputValue value)
+    {
+        _mousePosition = value.Get<Vector2>();
+    }
+
+    public void OnStickAim(InputValue value)
+    {
+        Vector2 input = value.Get<Vector2>();
+        if (input.magnitude < 0.05f) return;
+        input = input.normalized;
+        _gamepadAimDirection = new Vector3(input.x, 0f, input.y);
     }
 
     public void OnMove(InputValue value)
@@ -82,12 +101,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_cinemachineCamera != null)
-        {
-            _cinemachineCamera.m_XAxis.m_InputAxisValue = _lookInput.x;
-            _cinemachineCamera.m_YAxis.m_InputAxisValue = _lookInput.y;
-        }
-
         if (_possessed)
         {
             Vector3 up = Vector3.up;
@@ -96,15 +109,34 @@ public class PlayerController : MonoBehaviour
             Vector3 moveInput = forward * _moveInput.y + right * _moveInput.x;
         
             _characterMovement.SetMoveInput(moveInput);
-            _characterMovement.SetLookDirection(_mainCamera.transform.forward);
 
-            Vector3 aimPoint = _mainCamera.transform.position + _mainCamera.transform.forward * _aimDistance;
-            if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit hit, _aimDistance, _aimMask))
+            if (_useMouseAim)
             {
-                aimPoint = hit.point;
+                _crossHair.anchoredPosition = _mousePosition;
+                Plane footPlane = new Plane(Vector3.up, _target.transform.position);
+                Ray mouseRay = _mainCamera.ScreenPointToRay(_mousePosition);
+                if (footPlane.Raycast(mouseRay, out float distance))
+                {
+                    _aimPoint = mouseRay.GetPoint(distance) - mouseRay.direction * _aimOffset;
+                    Vector3 aimDir = (_aimPoint - _target.transform.position).Flatten().normalized;
+                    _characterMovement.SetLookDirection(aimDir);
+                }
             }
-            Debug.DrawLine(_mainCamera.transform.position, aimPoint, Color.red);
-            if(_isFiring) _weapon.TryFire(aimPoint);
+            else
+            {
+                _aimPoint = _target.transform.position + _gamepadAimDirection * _aimDistance + Vector3.up * _aimOffset;
+                _crossHair.anchoredPosition = _mainCamera.WorldToScreenPoint(_aimPoint);
+                _characterMovement.SetLookDirection(_gamepadAimDirection);
+            }
+
+            if(_isFiring) _weapon.TryFire(_aimPoint);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (_weapon == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(_weapon.transform.position, _aimPoint);
     }
 }
