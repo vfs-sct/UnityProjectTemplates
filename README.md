@@ -31,7 +31,7 @@ Download any/all of the following templates
 
 ### Sidescroller
 [URP - 2D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2D-platformer/urp-2D-platformer.tgz)  
-![2D-platformer-gif](https://i.imgur.com/3dUWR1i.gif)  
+![2D-platformer-gif](https://i.imgur.com/BB2vrW8.gif)  
 
 [URP - 2.5D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2.5D-platformer/urp-2.5D-platformer.tgz)  
 
