@@ -24,7 +24,7 @@ Download any/all of the following templates
 
 ### Third Person
 [URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/urp-third-person.tgz)  
-![gif](https://i.imgur.com/58zBJ4t.gif)
+![gif](https://i.imgur.com/3QePVI0.gif)
 
 [URP - Third Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person-shooter/urp-third-person-shooter.tgz)  
 [URP - Top-Down Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/top-down-shooter/urp-top-down-shooter.tgz)  
