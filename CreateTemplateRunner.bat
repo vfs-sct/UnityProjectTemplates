@@ -1,0 +1,1 @@
+CreateTemplate urp-third-person-shooter "URP Third Person Shooter" "A third person shooter template using URP and common packages."
