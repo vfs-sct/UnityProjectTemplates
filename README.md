@@ -31,7 +31,7 @@ Download any/all of the following templates
 
 ### Sidescroller
 [URP - 2D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2D-platformer/urp-2D-platformer.tgz)  
-![](https://i.imgur.com/8mrkYA6.gif)  
+![2D-platformer-gif](https://i.imgur.com/8mrkYA6.gif)  
 
 [URP - 2.5D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2.5D-platformer/urp-2.5D-platformer.tgz)  
 
@@ -41,7 +41,7 @@ Copy the downloaded template file(s) into the ProjectTemplates folder of the Uni
 
 Restart the HUB after copying in the templates
 
-![](../main/Documentation/installation.gif)
+![installation-gif](../main/Documentation/installation.gif)
 
 
 ## Use
