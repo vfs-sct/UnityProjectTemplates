@@ -30,6 +30,7 @@ Download any/all of the following templates
 ![gif](https://i.imgur.com/C8kOjmU.gif)
 
 [URP - Top-Down Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/top-down-shooter/urp-top-down-shooter.tgz)  
+![gif](https://i.imgur.com/fkZkL5O.gif)
 
 ### First Person
 [URP - First Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/first-person-shooter/urp-first-person-shooter.tgz)  
