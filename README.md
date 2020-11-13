@@ -20,9 +20,12 @@ Download any/all of the following templates
 
 ### Blank
 [URP - Blank](https://github.com/vfs-sct/UnityProjectTemplates/raw/blank/urp-blank.tgz)  
+![screenshot](https://i.imgur.com/zGdsm0T.png)
 
 ### Third Person
 [URP - Third Person](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person/urp-third-person.tgz)  
+![gif](https://i.imgur.com/58zBJ4t.gif)
+
 [URP - Third Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/third-person-shooter/urp-third-person-shooter.tgz)  
 [URP - Top-Down Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/top-down-shooter/urp-top-down-shooter.tgz)  
 
