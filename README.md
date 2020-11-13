@@ -28,13 +28,14 @@ Download any/all of the following templates
 
 ### First Person
 [URP - First Person Shooter](https://github.com/vfs-sct/UnityProjectTemplates/raw/first-person-shooter/urp-first-person-shooter.tgz)  
+![gif](https://i.imgur.com/xDP0ZRp.gif)
 
 ### Sidescroller
 [URP - 2D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2D-platformer/urp-2D-platformer.tgz)  
-![2D-platformer-gif](https://i.imgur.com/BB2vrW8.gif)  
+![gif](https://i.imgur.com/BB2vrW8.gif)
 
 [URP - 2.5D Platformer](https://github.com/vfs-sct/UnityProjectTemplates/raw/2.5D-platformer/urp-2.5D-platformer.tgz)  
-![2.5D-platformer-gif](https://i.imgur.com/aJhnt64.gif)
+![gif](https://i.imgur.com/aJhnt64.gif)
 
 Copy the downloaded template file(s) into the ProjectTemplates folder of the Unity version you're using. For example on Unity 2020.1.6f1:  
 ```Hub\Editor\2020.1.6f1\Editor\Data\Resources\PackageManager\ProjectTemplates```  
@@ -42,7 +43,7 @@ Copy the downloaded template file(s) into the ProjectTemplates folder of the Uni
 
 Restart the HUB after copying in the templates
 
-![installation-gif](../main/Documentation/installation.gif)
+![gif](../main/Documentation/installation.gif)
 
 
 ## Use
