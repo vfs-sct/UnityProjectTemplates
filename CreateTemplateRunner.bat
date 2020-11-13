@@ -1,1 +1,1 @@
-CreateTemplate test "Test Template" "This is a test template."
+CreateTemplate urp-top-down-shooter "URP Top Down Shooter" "A top-down shooter template using URP and common packages."
