@@ -16,11 +16,14 @@ MonoBehaviour:
   Acceleration: 10
   TurnSpeed: 10
   Gravity: -20
-  JumpHeight: 2
+  JumpHeight: 2.25
   AirControl: 0.1
+  AirTurning: 0
   GroundCheckRadius: 0.25
-  GroundCheckStart: {x: 0, y: 0.4, z: 0}
-  GroundCheckEnd: {x: 0, y: -0.25, z: 0}
+  GroundCheckStart: {x: 0, y: 0.35, z: 0}
+  GroundCheckEnd: {x: 0, y: 0.1, z: 0}
+  MaxSlopeAngle: 40
+  GroundedFudgeTime: 0.25
   GroundMask:
     serializedVersion: 2
     m_Bits: 1
