@@ -1,1 +1,1 @@
-CreateTemplate urp-2D-platformer "URP 2D Platformer" "A 2D platformer template using URP and common packages."
+CreateTemplate urp-first-person-shooter "URP First Person Shooter" "A first person shooter template using URP and common packages."
